@@ -2,7 +2,7 @@ import React from 'react';
 import './App.css';
 import { Release } from './interfaces/release';
 
-const IGNORED_FIELDS = ["resource_url", "uri", "data_quality", "master_url"];
+const IGNORED_FIELDS = ["resourceUrl", "uri", "dataQuality", "masterUrl"];
 
 class App extends React.Component<any, any> {
 	constructor(props: any) {
@@ -14,7 +14,7 @@ class App extends React.Component<any, any> {
 		const text = await (await fetch("http://localhost:8000/getDiscogs")).text();
 		let temp  = JSON.parse(text);
 		let obj = new Release(temp);
-		let arr = this.createMap(temp);
+		let arr = this.createMap(obj);
 		this.setState( {release: obj, array: arr})
 	}
 
@@ -22,15 +22,14 @@ class App extends React.Component<any, any> {
 		this.callAPI();
 	}
 
-	createMap(obj: any) {
+	createMap(obj: Release) {
 		let arr = Object.entries(obj).map(([key, value]) => {
 			if (typeof value === 'object' || value === null || IGNORED_FIELDS.includes(key)) {
 				return null;
 			}
-			if (key === 'thumb') {
+			if (key === 'thumbnail') {
 				console.log(value);
 				return (
-					// @ts-ignore
 					<img src={value} alt="img" />
 				)
 			}
@@ -42,16 +41,7 @@ class App extends React.Component<any, any> {
 	}
 
 	formatKey(key: string) {
-		let formatted = key.split('_');
-		formatted.forEach((element, index, self) => {
-			self[index] = self[index][0].toLocaleUpperCase() + self[index].substr(1);
-
-			if (element === 'id') {
-				self[index] = 'ID';
-			}
-		});
-
-		return formatted.join(' ');
+		return key.replace(/((?<!^)[A-Z](?![A-Z]))(?=\S)/g, ' $1').replace(/^./, s => s.toUpperCase()).replace('Id', 'ID');
 	}
 
 	render() {

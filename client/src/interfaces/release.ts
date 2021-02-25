@@ -10,7 +10,7 @@ export class Release {
     community: any;
     companies: any[];
     country: string;
-    date_Added: string;
+    dateAdded: string;
     dateChanged: string;
     estimatedWeight: number;
     extraArtists: any[];
@@ -81,7 +81,7 @@ export class Release {
         this.community = obj.community;
         this.companies = obj.companies;
         this.country = obj.country;
-        this.date_Added = obj.date_added;
+        this.dateAdded = obj.date_added;
         this.dateChanged = obj.date_changed;
         this.estimatedWeight = obj.estimated_weight;
         this.extraArtists = obj.extraartists;
