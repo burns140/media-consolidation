@@ -4,13 +4,13 @@ export class Release {
     title: string;
     id: number;
     artists: any[];
-    artistsSort: string[];
+    artistsSort?: string[];
     dataQuality: string;
     thumbnail: string;
     community: any;
     companies: any[];
     country: string;
-    dateAdded: string;
+    date_Added: string;
     dateChanged: string;
     estimatedWeight: number;
     extraArtists: any[];
@@ -37,6 +37,41 @@ export class Release {
     year: number;
 
     constructor(obj: any) {
+        // this.title = obj.title;
+        // this.id = obj.id;
+        // this.artists = obj.artists;
+        // this.artistsSort = obj.artistsSort;
+        // this.dataQuality = obj.dataQuality;
+        // this.thumbnail = obj.thumbnail;
+        // this.community = obj.community;
+        // this.companies = obj.companies;
+        // this.country = obj.country;
+        // this.dateAdded = obj.dateAdded;
+        // this.dateChanged = obj.dateChanged;
+        // this.estimatedWeight = obj.estimatedWeight;
+        // this.extraArtists = obj.extraArtists;
+        // this.formatQuantity = obj.formatQuantity;
+        // this.formats = obj.formats;
+        // this.genres = obj.genres;
+        // this.identifiers = obj.identifiers;
+        // this.images = obj.images;
+        // this.labels = obj.labels;
+        // this.lowestPrice = obj.lowestPrice;
+        // this.masterId = obj.masterId;
+        // this.masterUrl = obj.masterUrl;
+        // this.notes = obj.notes;
+        // this.numForSale = obj.numForSale;
+        // this.released = obj.released;
+        // this.releasedFormatted = obj.releasedFormatted;
+        // this.resourceUrl = obj.resourceUrl;
+        // this.series = obj.series;
+        // this.status = obj.status;
+        // this.styles = obj.styles;
+        // this.tracklist = obj.tracklist;
+        // this.uri = obj.uri;
+        // this.videos = obj.videos;
+        // this.year = obj.year;
+
         this.title = obj.title;
         this.id = obj.id;
         this.artists = obj.artists;
@@ -46,7 +81,7 @@ export class Release {
         this.community = obj.community;
         this.companies = obj.companies;
         this.country = obj.country;
-        this.dateAdded = obj.date_added;
+        this.date_Added = obj.date_added;
         this.dateChanged = obj.date_changed;
         this.estimatedWeight = obj.estimated_weight;
         this.extraArtists = obj.extraartists;
@@ -79,18 +114,5 @@ export class Release {
             self[index] = self[index].trim();
         });
         return arr;
-    }
-
-    formatKey(key: string) {
-        let formatted = key.split('_');
-		formatted.forEach((element, index, self) => {
-			self[index] = self[index][0].toLocaleUpperCase() + self[index].substr(1);
-
-			if (element === 'id') {
-				self[index] = 'ID';
-			}
-		});
-
-		return formatted.join(' ');
     }
 }

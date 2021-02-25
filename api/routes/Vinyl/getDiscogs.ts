@@ -17,9 +17,9 @@ router.get("/", async (req, res) => {
         artistString += `${artist.name}, `
     });
 
-    const classRelease: Release = plainToClass(Release, release);
+    const classRelease: Release = new Release(release);
     console.log('got release');
-    res.send(classRelease);
+    res.send(release);
 
     //res.send(release.thumb);
     //res.send(`<img src="${release.thumb}" >`)

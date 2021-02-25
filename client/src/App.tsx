@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import { Release } from '../../api/interfaces/release';
+import { Release } from './interfaces/release';
 
 const IGNORED_FIELDS = ["resource_url", "uri", "data_quality", "master_url"];
 
@@ -14,23 +14,23 @@ class App extends React.Component<any, any> {
 		const text = await (await fetch("http://localhost:8000/getDiscogs")).text();
 		let temp  = JSON.parse(text);
 		let obj = new Release(temp);
-		console.log(obj);
-		let arr = this.createMap(obj);
+		let arr = this.createMap(temp);
 		this.setState( {release: obj, array: arr})
 	}
 
 	componentDidMount() {
-		//this.callAPI();
 		this.callAPI();
 	}
 
-	createMap(obj: Release) {
+	createMap(obj: any) {
 		let arr = Object.entries(obj).map(([key, value]) => {
 			if (typeof value === 'object' || value === null || IGNORED_FIELDS.includes(key)) {
 				return null;
 			}
 			if (key === 'thumb') {
+				console.log(value);
 				return (
+					// @ts-ignore
 					<img src={value} alt="img" />
 				)
 			}
